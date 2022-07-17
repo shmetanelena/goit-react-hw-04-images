@@ -2,8 +2,18 @@ import './ImageGallery.css';
 import ImageGalleryItem from 'components/ImageGalleryItem';
 import { Component } from 'react';
 import { HITS_PER_PAGE } from '../../services/pixebay-api';
+import PropTypes from 'prop-types';
 
 class ImageGallery extends Component {
+  static propTypes = {
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+      })
+    ).isRequired,
+    page: PropTypes.number.isRequired,
+  };
+
   componentDidMount() {
     this.gallery = document.querySelector('.ImageGallery');
   }

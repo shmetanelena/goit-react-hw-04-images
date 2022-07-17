@@ -4,12 +4,7 @@ import './Loader.css';
 
 const Loader = () => (
   <div className="Loader">
-    <ThreeDots
-      color="gray"
-      height={200}
-      width={200}
-      // background="green"
-    />
+    <ThreeDots color="gray" height={80} width={80} />
   </div>
 );
 

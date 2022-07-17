@@ -8,8 +8,6 @@ import Loader from './Loader';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-//const HITS_PER_PAGE = 12;
-
 class App extends Component {
   state = {
     query: '',
@@ -43,12 +41,14 @@ class App extends Component {
   }
 
   handleSubmit = query => {
-    this.setState({
-      query,
-      items: [],
-      page: 1,
-      totalPages: 0,
-    });
+    if (query !== this.state.query) {
+      this.setState({
+        query,
+        items: [],
+        page: 1,
+        totalPages: 0,
+      });
+    }
   };
 
   loadMore = () => {

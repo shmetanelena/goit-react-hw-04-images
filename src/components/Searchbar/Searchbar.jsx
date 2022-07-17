@@ -2,8 +2,13 @@ import { Component } from 'react';
 import './Searchbar.css';
 import { ImSearch } from 'react-icons/im';
 import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
 
 class Searchbar extends Component {
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+  };
+
   state = {
     query: '',
   };
