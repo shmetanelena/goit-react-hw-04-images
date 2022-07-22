@@ -1,10 +1,47 @@
-import { Component } from 'react';
 import './Searchbar.css';
 import { ImSearch } from 'react-icons/im';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
-class Searchbar extends Component {
+const Searchbar = ({ onSubmit }) => {
+  const [query, setQuery] = useState('');
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (query.trim() === '') {
+      toast.error('Enter the name');
+      return;
+    }
+    onSubmit(query);
+  };
+
+  return (
+    <header className="Searchbar">
+      <form className="SearchForm" onSubmit={handleSubmit}>
+        <button type="submit" className="SearchForm-button">
+          <ImSearch size={25} />
+        </button>
+        <input
+          className="SearchForm-input"
+          type="text"
+          autoComplete="off"
+          autoFocus
+          placeholder="Search images and photos"
+          onChange={e => setQuery(e.currentTarget.value.toLowerCase())}
+          value={query}
+        />
+      </form>
+    </header>
+  );
+};
+
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
+
+/*
+class _Searchbar extends Component {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
   };
@@ -33,7 +70,7 @@ class Searchbar extends Component {
       <header className="Searchbar">
         <form className="SearchForm" onSubmit={this.handleSubmit}>
           <button type="submit" className="SearchForm-button">
-            {/* <span className="SearchForm-button-label">Search</span> */}
+            
             <ImSearch size={25} />
           </button>
           <input
@@ -50,5 +87,6 @@ class Searchbar extends Component {
     );
   }
 }
+*/
 
 export default Searchbar;

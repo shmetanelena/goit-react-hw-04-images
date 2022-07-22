@@ -1,11 +1,44 @@
-import { Component } from 'react';
 import './Modal.css';
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 
-class Modal extends Component {
+const Modal = ({ src, alt, onClose }) => {
+  const handleKeyDown = e => {
+    if (e.code === 'Escape') {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  const handleClickOverlay = e => {
+    if (e.currentTarget === e.target) {
+      onClose();
+    }
+  };
+  return (
+    <div className="Overlay" onClick={handleClickOverlay}>
+      <div className="Modal">
+        <img src={src} alt={alt} />
+      </div>
+    </div>
+  );
+};
+
+Modal.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+};
+
+/*
+class _Modal extends Component {
   static propTypes = {
     onClose: PropTypes.func.isRequired,
-    stc: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
     alt: PropTypes.string.isRequired,
   };
 
@@ -40,5 +73,7 @@ class Modal extends Component {
     );
   }
 }
+
+*/
 
 export default Modal;
