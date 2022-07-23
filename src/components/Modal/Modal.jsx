@@ -1,4 +1,4 @@
-import './Modal.css';
+import styles from './Modal.module.css';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 
@@ -20,8 +20,8 @@ const Modal = ({ src, alt, onClose }) => {
     }
   };
   return (
-    <div className="Overlay" onClick={handleClickOverlay}>
-      <div className="Modal">
+    <div className={styles.Overlay} onClick={handleClickOverlay}>
+      <div className={styles.Modal}>
         <img src={src} alt={alt} />
       </div>
     </div>
@@ -33,47 +33,5 @@ Modal.propTypes = {
   src: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
 };
-
-/*
-class _Modal extends Component {
-  static propTypes = {
-    onClose: PropTypes.func.isRequired,
-    src: PropTypes.string.isRequired,
-    alt: PropTypes.string.isRequired,
-  };
-
-  componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyDown);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown);
-  }
-
-  handleKeyDown = e => {
-    if (e.code === 'Escape') {
-      this.props.onClose();
-    }
-  };
-
-  handleClickOverlay = e => {
-    if (e.currentTarget === e.target) {
-      this.props.onClose();
-    }
-  };
-
-  render() {
-    const { src, alt } = this.props;
-    return (
-      <div className="Overlay" onClick={this.handleClickOverlay}>
-        <div className="Modal">
-          <img src={src} alt={alt} />
-        </div>
-      </div>
-    );
-  }
-}
-
-*/
 
 export default Modal;
