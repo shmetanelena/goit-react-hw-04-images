@@ -3,16 +3,15 @@ import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 
 const Modal = ({ src, alt, onClose }) => {
-  const handleKeyDown = e => {
-    if (e.code === 'Escape') {
-      onClose();
-    }
-  };
-
   useEffect(() => {
+    const handleKeyDown = e => {
+      if (e.code === 'Escape') {
+        onClose();
+      }
+    };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [onClose]);
 
   const handleClickOverlay = e => {
     if (e.currentTarget === e.target) {
